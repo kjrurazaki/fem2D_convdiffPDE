@@ -1,5 +1,6 @@
 from scipy.sparse.linalg import gmres, spilu, LinearOperator, splu
 
+
 def gmres_solver(SYSMAT, RHS):
     # Set parameters
     restart = 10
@@ -17,8 +18,8 @@ def gmres_solver(SYSMAT, RHS):
         print("Using alternative preconditioner...")
         lu = splu(SYSMAT)
         M = LinearOperator((SYSMAT.shape[0], SYSMAT.shape[1]), lu.solve)
-        error = 'singular'
+        error = "singular"
 
     # Solve the system using GMRES with the preconditioner
-    x, info = gmres(SYSMAT, RHS, restart=restart, tol = tol, maxiter = maxit, M = M)
+    x, info = gmres(SYSMAT, RHS, restart=restart, tol=tol, maxiter=maxit, M=M)
     return x, info, error
